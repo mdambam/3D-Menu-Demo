@@ -119,8 +119,9 @@ function TableItem({ item, position, onClick, isSelected }: TableItemProps) {
       case 'steak':
         return (
           <>
-            <mesh material={material}>
+            <mesh>
               <capsuleGeometry args={[0.4, 0.8, 4, 8]} />
+              {material}
             </mesh>
             {[0, 1, 2].map(i => (
               <mesh key={i} position={[(i - 1) * 0.15, 0.25, 0]} rotation={[0, 0, Math.PI / 2]}>
@@ -137,8 +138,9 @@ function TableItem({ item, position, onClick, isSelected }: TableItemProps) {
               <cylinderGeometry args={[0.5, 0.4, 0.15, 32]} />
               <meshStandardMaterial color="#d4a574" />
             </mesh>
-            <mesh position={[0, -0.05, 0]} material={material}>
+            <mesh position={[0, -0.05, 0]}>
               <cylinderGeometry args={[0.45, 0.45, 0.12, 32]} />
+              {material}
             </mesh>
             <mesh position={[0, 0.08, 0]}>
               <cylinderGeometry args={[0.47, 0.47, 0.02, 32]} />
@@ -153,8 +155,9 @@ function TableItem({ item, position, onClick, isSelected }: TableItemProps) {
       case 'sushi':
         return (
           <>
-            <mesh material={material}>
+            <mesh>
               <cylinderGeometry args={[0.3, 0.3, 0.8, 32]} />
+              {material}
             </mesh>
             <mesh position={[0, 0, 0]}>
               <cylinderGeometry args={[0.31, 0.31, 0.78, 32]} />
@@ -165,8 +168,9 @@ function TableItem({ item, position, onClick, isSelected }: TableItemProps) {
       case 'dessert':
         return (
           <>
-            <mesh position={[0, -0.15, 0]} material={material}>
+            <mesh position={[0, -0.15, 0]}>
               <cylinderGeometry args={[0.35, 0.35, 0.25, 32]} />
+              {material}
             </mesh>
             <mesh position={[0, 0.05, 0]}>
               <cylinderGeometry args={[0.33, 0.33, 0.2, 32]} />
@@ -180,8 +184,9 @@ function TableItem({ item, position, onClick, isSelected }: TableItemProps) {
         )
       default:
         return (
-          <mesh material={material}>
+          <mesh>
             <sphereGeometry args={[0.4, 32, 32]} />
+            {material}
           </mesh>
         )
     }
