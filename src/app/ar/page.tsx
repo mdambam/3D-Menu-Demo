@@ -160,29 +160,15 @@ export default function ARPage() {
           
           <Environment preset="city" />
           
-          {/* Food Model with Animation */}
-          <AnimatePresence mode="wait" custom={direction}>
-            <motion.group
-              key={currentIndex}
-              custom={direction}
-              variants={slideVariants}
-              initial="enter"
-              animate="center"
-              exit="exit"
-              transition={{
-                x: { type: "spring", stiffness: 300, damping: 30 },
-                opacity: { duration: 0.2 },
-                scale: { duration: 0.2 },
-              }}
-            >
-              <FoodModel 
-                type={getModelType(currentItem)}
-                color={getModelColor(currentItem)}
-                isActive={true}
-                modelUrl={currentItem.model_url}
-              />
-            </motion.group>
-          </AnimatePresence>
+          {/* Food Model */}
+          <group>
+            <FoodModel 
+              type={getModelType(currentItem)}
+              color={getModelColor(currentItem)}
+              isActive={true}
+              modelUrl={currentItem.model_url}
+            />
+          </group>
           
           {/* Ground shadow */}
           <ContactShadows 
