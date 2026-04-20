@@ -74,7 +74,9 @@ export default function NativeARViewer({
   }, [])
 
   const modelUrl = item.model_url || ''
-  const hasModel = modelUrl && (modelUrl.endsWith('.glb') || modelUrl.endsWith('.gltf') || modelUrl.endsWith('.obj'))
+  // Strip query params for extension check (Supabase URLs have ?token=xyz)
+  const cleanUrl = modelUrl.split('?')[0].toLowerCase()
+  const hasModel = modelUrl && (cleanUrl.endsWith('.glb') || cleanUrl.endsWith('.gltf') || cleanUrl.endsWith('.obj'))
 
   return (
     <>
