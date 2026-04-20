@@ -270,8 +270,11 @@ export default function FoodModel({ color = '#c9a962', type = 'sphere', isActive
 
   // If external model URL is provided, use it
   if (modelUrl) {
+    // Strip query parameters to get clean URL for extension check
+    const cleanUrl = modelUrl.split('?')[0].toLowerCase()
+    
     // OBJ files
-    if (modelUrl.toLowerCase().endsWith('.obj')) {
+    if (cleanUrl.endsWith('.obj')) {
       return (
         <Suspense fallback={<ModelLoader />}>
           <OBJModel url={modelUrl} isActive={isActive} />
@@ -279,7 +282,7 @@ export default function FoodModel({ color = '#c9a962', type = 'sphere', isActive
       )
     }
     // GLB/GLTF files
-    if (modelUrl.toLowerCase().endsWith('.glb') || modelUrl.toLowerCase().endsWith('.gltf')) {
+    if (cleanUrl.endsWith('.glb') || cleanUrl.endsWith('.gltf')) {
       return (
         <Suspense fallback={<ModelLoader />}>
           <ExternalModel url={modelUrl} isActive={isActive} />

@@ -53,8 +53,9 @@ function TableItem({ item, position, onClick, isSelected }: TableItemProps) {
     }
   })
 
-  // Check for external model
-  if (item.model_url && (item.model_url.endsWith('.glb') || item.model_url.endsWith('.gltf'))) {
+  // Check for external model (strip query params for extension check)
+  const cleanUrl = item.model_url?.split('?')[0].toLowerCase() || ''
+  if (item.model_url && (cleanUrl.endsWith('.glb') || cleanUrl.endsWith('.gltf'))) {
     return (
       <group 
         position={position}
