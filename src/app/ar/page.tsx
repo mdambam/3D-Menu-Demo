@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect, useCallback, useRef } from 'react'
+import { useState, useEffect, useCallback, useRef, Suspense } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls, Environment, ContactShadows } from '@react-three/drei'
@@ -40,7 +40,7 @@ function useSwipe(onSwipeLeft: () => void, onSwipeRight: () => void) {
   return { onTouchStart, onTouchMove, onTouchEnd }
 }
 
-export default function ARPage() {
+function ARPageContent() {
   const searchParams = useSearchParams()
   const router = useRouter()
   const [items] = useState<MenuItem[]>(mockMenuItems)
@@ -314,5 +314,21 @@ export default function ARPage() {
         </div>
       </motion.div>
     </main>
+  )
+}
+
+// Export with Suspense wrapper
+export default function ARPage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-black flex items-center justify-center text-white">
+        <div className="text-center">
+          <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p>Loading AR Experience...</p>
+        </div>
+      </div>
+    }>
+      <ARPageContent />
+    </Suspense>
   )
 }

@@ -1,11 +1,11 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState, useEffect, Suspense } from 'react'
 import { useSearchParams } from 'next/navigation'
 import NativeARViewer from '@/components/NativeARViewer'
 import { getMenuItems, MenuItem } from '@/lib/supabase'
 
-export default function ARNativePage() {
+function ARNativePageContent() {
   const searchParams = useSearchParams()
   const itemId = searchParams.get('id')
   
@@ -69,5 +69,21 @@ export default function ARNativePage() {
       hasNext={items.length > 1}
       hasPrev={items.length > 1}
     />
+  )
+}
+
+// Export with Suspense wrapper
+export default function ARNativePage() {
+  return (
+    <Suspense fallback={
+      <div className="min-h-screen bg-black flex items-center justify-center text-white">
+        <div className="text-center">
+          <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto mb-4" />
+          <p>Loading Native AR...</p>
+        </div>
+      </div>
+    }>
+      <ARNativePageContent />
+    </Suspense>
   )
 }
